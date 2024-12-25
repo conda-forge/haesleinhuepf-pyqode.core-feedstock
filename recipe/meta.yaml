@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/haesleinhuepf-pyqode.core-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/haesleinhuepf-pyqode.core-{{ version }}.tar.gz
   sha256: 3b8ca2623244cccc5d7cf3ab02906375a597686d670bab772049e18177db16eb
 
 build:
@@ -14,18 +14,18 @@ build:
     - pyqode-console = pyqode.core.tools.console:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
     - pyqt_distutils
     - pytest
-    - python >=3.7
+    - python {{ python_min }}
   run:
     - future
     - pygments
-    - python >=3.7
+    - python >={{ python_min }}
   run_constrained:
     - pyqode.core =99999999999999
 
@@ -38,6 +38,7 @@ test:
     # - pyqode-console --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/haesleinhuepf/pyqode.core
